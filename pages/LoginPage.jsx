@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Button, Image, Keyboard, KeyboardAvoidingView, Text, TextInput, View } from 'react-native';
-// import SvgUri from 'react-native-svg-uri';
-
+import { Button, Image, Keyboard, KeyboardAvoidingView, Text, ScrollView, View } from 'react-native';
+import { FloatingLabelInput } from 'react-native-floating-label-input';
 
 export default function LoginPage({ navigation }) {
 
@@ -42,7 +41,7 @@ export default function LoginPage({ navigation }) {
     };
   }, []);
   return (
-<View style={{ flex: 1 }}>
+  <View style={{ flex: 1 }} >
       <View className="mt-14">
         <Text  className="text-primary text-center font-semibold text-3xl">Nehtah Pharmacy</Text>
         <Text style={{ fontWeight: 'bold', textAlign: 'center', padding: 10 }}  className="text-gray-400">This simple online tool generates small text from your regular sized text.</Text>
@@ -66,19 +65,31 @@ export default function LoginPage({ navigation }) {
                 <Text className=" text-gray-400">Log in to access your account</Text>
               </View>
             </View>
-            <TextInput
-              placeholder="Email"
+            <View className="pb-2">
+             <FloatingLabelInput
+              label="Email"
               value={email}
               onChangeText={setEmail}
               style={{ backgroundColor: '#f3f4f6', borderWidth: 1, borderColor: '#d1d5db', borderRadius: 5, paddingHorizontal: 10, paddingVertical: 12, marginBottom: 15 }}
             />
-            <TextInput
-              placeholder="Password"
+            </View>
+            <View className="pb-2">
+             <FloatingLabelInput
+              label="Password"
               value={password}
               onChangeText={setPassword}
               secureTextEntry={true}
               style={{ backgroundColor: '#f3f4f6', borderWidth: 1, borderColor: '#d1d5db', borderRadius: 5, paddingHorizontal: 10, paddingVertical: 12, marginBottom: 15 }}
             />
+             <View className="w-full flex justify-end ">
+                <Button
+                  className="text-primary"
+                  title="Register"
+                  color="#1E7B7B"
+                  onPress={() => navigation.navigate('Register')}
+                  />
+              </View>
+            </View>
             <View className="flex flex-col gap-4">
               <View className="w-full rounded-md bg-primary text-primary ">
                 <Button
@@ -93,7 +104,7 @@ export default function LoginPage({ navigation }) {
                   className="text-primary"
                   title="Register"
                   color="#1E7B7B"
-                  onPress={handleLogin}
+                  onPress={() => navigation.navigate('Register')}
                   />
               </View>
             </View>

@@ -5,7 +5,14 @@ module.exports = {
     "./Root.{js,jsx,ts,tsx}",
     "./pages/*.{js,jsx,ts,tsx}"
   ],
-  extend: {},
+  theme: {
+    extend: {
+      colors: {
+        primary:'#1E7B7B',
+        secondary:'#ADEBEB'
+      },
+    },
+  },
   plugins: [],
 }
 

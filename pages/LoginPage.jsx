@@ -43,9 +43,9 @@ export default function LoginPage({ navigation }) {
   }, []);
   return (
 <View style={{ flex: 1 }}>
-      <View className="mt-20">
-        <Text style={{ fontWeight: 'bold', textAlign: 'center', fontSize: 20, padding: 10 }} className="text-primary">Nehtah Pharmacy</Text>
-        <Text style={{ fontWeight: 'bold', textAlign: 'center', padding: 10 }}  className="text-primary">This simple online tool generates small text from your regular sized text.</Text>
+      <View className="mt-14">
+        <Text  className="text-primary text-center font-semibold text-3xl">Nehtah Pharmacy</Text>
+        <Text style={{ fontWeight: 'bold', textAlign: 'center', padding: 10 }}  className="text-gray-400">This simple online tool generates small text from your regular sized text.</Text>
       </View>
       <Image
         style={{ width: '100%', height: '40%', resizeMode: 'cover' }}
@@ -54,8 +54,18 @@ export default function LoginPage({ navigation }) {
       <KeyboardAvoidingView
         style={{ flex: 1 }}
       >
-        <View className=" absolute bottom-1/3 w-full " style={{ paddingHorizontal: 20, paddingBottom: keyboardOffset }}>
+        <View className=" absolute bottom-0 w-full " style={{ paddingHorizontal: 20, paddingBottom: keyboardOffset }}>
           <View style={{ backgroundColor: '#ffffff', borderRadius: 10, padding: 20, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5 }}>
+            <View className="h-[80px] pt-2 pb-4 flex flex-row justify-start items-center space-x-4">
+              <Image
+                style={{ width: '20%', height: '100%', resizeMode: 'cover' }}
+                source={require('../images/logo.png')}
+              />
+              <View className="w-60">
+                <Text className="text-2xl text-primary">Welcome back</Text>
+                <Text className=" text-gray-400">Log in to access your account</Text>
+              </View>
+            </View>
             <TextInput
               placeholder="Email"
               value={email}
@@ -69,23 +79,30 @@ export default function LoginPage({ navigation }) {
               secureTextEntry={true}
               style={{ backgroundColor: '#f3f4f6', borderWidth: 1, borderColor: '#d1d5db', borderRadius: 5, paddingHorizontal: 10, paddingVertical: 12, marginBottom: 15 }}
             />
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20 }}>
-              <Button
-                title="Login"
-                onPress={handleLogin}
-                color="#3b82f6"
-                style={{ backgroundColor: '#3b82f6', borderRadius: 5, paddingHorizontal: 20, paddingVertical: 12, width: '48%' }}
-              />
-              <Button
-                title="Reset"
-                onPress={handleReset}
-                color="#3b82f6"
-                style={{ backgroundColor: '#ef4444', borderRadius: 5, paddingHorizontal: 20, paddingVertical: 12, width: '48%' }}
-              />
+            <View className="flex flex-col gap-4">
+              <View className="w-full rounded-md bg-primary text-primary ">
+                <Button
+                  color="#ffff"
+                  title="Login"
+                  onPress={handleLogin}
+                  />
+              </View>
+              <View className="w-full rounded-md flex flex-row ">
+                <Text className="my-auto text-gray-400">Don't have an account yet?</Text>
+                <Button
+                  className="text-primary"
+                  title="Register"
+                  color="#1E7B7B"
+                  onPress={handleLogin}
+                  />
+              </View>
             </View>
           </View>
         </View>
       </KeyboardAvoidingView>
+      <View className="m-2">
+        <Text style={{ fontWeight: 'bold', textAlign: 'center', padding: 10 }}  className="text-gray-400">Register and Create profile to become a supplier.</Text>
+      </View>
     </View>
 
   );

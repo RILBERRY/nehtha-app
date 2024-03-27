@@ -5,19 +5,16 @@ import { FloatingLabelInput } from 'react-native-floating-label-input';
 export default function RegisterPage({ navigation }) {
 
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [contactNumber, setContactNumber] = useState('');
   const [keyboardOffset, setKeyboardOffset] = useState(0);
-  const handleRegister = () => {
+  const handlePasswordReset = () => {
     // Handle login logic here
-    console.log('Logging in with:', { email, password, passwordConfirmation, fullName, contactNumber });
+    console.log('Reset in with:', { email });
+    navigation.navigate('ResetPassword');
   };
   const handleReset = () => {
     // Handle reset logic here
     setEmail('');
-    setPassword('');
+
   };
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -74,29 +71,11 @@ export default function RegisterPage({ navigation }) {
                 source={require('../images/logo.png')}
               />
               <View className="w-60">
-                <Text className="text-2xl text-primary">Welcome</Text>
-                <Text className=" text-gray-400">Register your account</Text>
+                <Text className="text-2xl text-primary">Password Reset</Text>
+                <Text className=" text-gray-400">Did you forget Password</Text>
               </View>
             </View>
 
-            <View className="pb-2">
-             <FloatingLabelInput
-              label="Full Name"
-              value={fullName}
-              onChangeText={setFullName}
-              style={{ backgroundColor: '#f3f4f6', borderWidth: 1, borderColor: '#d1d5db', borderRadius: 5, paddingHorizontal: 10, paddingVertical: 12, marginBottom: 15 }}
-            />
-            </View>
-
-            <View className="pb-2">
-             <FloatingLabelInput
-              label="Contact Number"
-              value={contactNumber}
-              keyboardType="numeric"
-              onChangeText={setContactNumber}
-              style={{ backgroundColor: '#f3f4f6', borderWidth: 1, borderColor: '#d1d5db', borderRadius: 5, paddingHorizontal: 10, paddingVertical: 12, marginBottom: 15 }}
-            />
-            </View>
             <View className="pb-2">
              <FloatingLabelInput
               label="Email"
@@ -106,38 +85,18 @@ export default function RegisterPage({ navigation }) {
             />
             </View>
 
-            <View className="pb-2">
-             <FloatingLabelInput
-              label="Password"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry={true}
-              style={{ backgroundColor: '#f3f4f6', borderWidth: 1, borderColor: '#d1d5db', borderRadius: 5, paddingHorizontal: 10, paddingVertical: 12, marginBottom: 15 }}
-            />
-            </View>
-            <View className="pb-2">
-             <FloatingLabelInput
-              label="Password Confirmation"
-              value={passwordConfirmation}
-              onChangeText={setPasswordConfirmation}
-              secureTextEntry={true}
-              style={{ backgroundColor: '#f3f4f6', borderWidth: 1, borderColor: '#d1d5db', borderRadius: 5, paddingHorizontal: 10, paddingVertical: 12, marginBottom: 15 }}
-            />
-            </View>
-
             <View className="flex flex-col gap-4">
               <View className="w-fit py-2 rounded-md bg-primary text-primary ">
                 <Button
                   color="#ffff"
-                  title="Register"
-                  onPress={handleRegister}
+                  title="Send Reset Request"
+                  onPress={handlePasswordReset}
                   />
               </View>
-              <View className="w-full rounded-md flex flex-row ">
-                <Text className="my-auto text-gray-400">I already have an account!</Text>
+              <View className="w-full rounded-md flex ">
                 <Button
                   className="text-primary"
-                  title="Login"
+                  title="Back"
                   color="#1E7B7B"
                   onPress={() => navigation.navigate('Login')}
                   />

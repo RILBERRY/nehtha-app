@@ -4,6 +4,8 @@ import HomePage from './pages/HomePage';
 import MemoPage from './pages/MemoPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
 import { AuthContext} from './context/AuthProvider';
 import { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, View} from 'react-native';
@@ -24,6 +26,16 @@ const AuthStackNavigator = () => {
       <Stack.Screen
         name="Register"
         component={RegisterPage}
+        options={{  headerShown:false }}
+      />
+      <Stack.Screen
+        name="ForgotPassword"
+        component={ForgotPasswordPage}
+        options={{  headerShown:false }}
+      />
+      <Stack.Screen
+        name="ResetPassword"
+        component={ResetPasswordPage}
         options={{  headerShown:false }}
       />
     </Stack.Navigator>

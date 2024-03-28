@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Button, Image, Keyboard, KeyboardAvoidingView, Text, ScrollView, View } from 'react-native';
 import { FloatingLabelInput } from 'react-native-floating-label-input';
 
-export default function RegisterPage({ navigation }) {
+export default function ForgotPasswordPage({ navigation }) {
 
   const [email, setEmail] = useState('');
   const [keyboardOffset, setKeyboardOffset] = useState(0);

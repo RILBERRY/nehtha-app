@@ -10,8 +10,12 @@ import { AuthContext} from './context/AuthProvider';
 import { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, View} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import * as SecureStore from 'expo-secure-store';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import LogoutPage from './pages/LogoutPage';
 
 const Stack = createStackNavigator()
+const Drawer = createDrawerNavigator();
 
 const AuthStackNavigator = () => {
   return (
@@ -46,7 +50,18 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const { user, setUser } = useContext(AuthContext);
   useEffect(()=>{
-    console.log(user)
+
+    SecureStore.getItemAsync('user')
+    .then(userString => {
+      if(userString){
+        setUser('test');
+      }
+      setIsLoading(false);
+    })
+    .catch(err => {
+      console.log(err);
+      setIsLoading(false);
+    });
 
     setTimeout(()=>{
       setIsLoading(false)
@@ -68,7 +83,8 @@ export default function App() {
     <NavigationContainer >
       <Drawer.Navigator initialRouteName="Login"  className="bg-red-500">
         <Drawer.Screen name="Home" component={HomePage} />
-        <Drawer.Screen name="Notifications" component={MemoPage} />
+        <Drawer.Screen name="Memo" component={MemoPage} />
+        <Drawer.Screen name="Logout" component={LogoutPage} />
       </Drawer.Navigator>
     </NavigationContainer>
     ) : (

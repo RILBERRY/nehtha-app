@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useContext, useState } from "react";
 import {
   Button,
   Image,
@@ -9,20 +9,15 @@ import {
   View,
 } from "react-native";
 import { FloatingLabelInput } from "react-native-floating-label-input";
+import { AuthContext } from "../context/AuthProvider";
 
 export default function LoginPage({ navigation }) {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [keyboardOffset, setKeyboardOffset] = useState(0);
-  const handleLogin = () => {
-    // Handle login logic here
-    console.log("Logging in with:", { email, password });
-  };
-  const handleReset = () => {
-    // Handle reset logic here
-    setEmail("");
-    setPassword("");
-  };
+  const {login} = useContext(AuthContext);
+
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       "keyboardDidShow",
@@ -133,7 +128,7 @@ export default function LoginPage({ navigation }) {
 
             <View className="flex flex-col gap-2 justify-end">
               <View className="w-fit py-2 rounded-md bg-primary text-primary ">
-                <Button color="#ffff" title="Login" onPress={handleLogin} />
+                <Button color="#ffff" title="Login" onPress={() => login(email, password)} />
               </View>
               <View className="w-fit flex flex-row justify-end ">
                 <Button

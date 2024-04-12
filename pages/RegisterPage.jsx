@@ -1,24 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Button, Image, Keyboard, KeyboardAvoidingView, Text, ScrollView, View } from 'react-native';
 import { FloatingLabelInput } from 'react-native-floating-label-input';
+import { AuthContext } from '../context/AuthProvider';
 
 export default function RegisterPage({ navigation }) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [contactNumber, setContactNumber] = useState('');
+  const [name, setName] = useState('');
+  const [contact, setContact] = useState('');
+  const {register, error, isLoading} = useContext(AuthContext);
   const [keyboardOffset, setKeyboardOffset] = useState(0);
-  const handleRegister = () => {
-    // Handle login logic here
-    console.log('Logging in with:', { email, password, passwordConfirmation, fullName, contactNumber });
-  };
-  const handleReset = () => {
-    // Handle reset logic here
-    setEmail('');
-    setPassword('');
-  };
+
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -78,12 +72,18 @@ export default function RegisterPage({ navigation }) {
                 <Text className=" text-gray-400">Register your account</Text>
               </View>
             </View>
-
+            {error &&
+              <View className="w-fit  rounded-md flex flex-row ">
+                <Text className="my-auto text-red-600">
+                  {error}
+                </Text>
+              </View>
+              }
             <View className="pb-2">
              <FloatingLabelInput
               label="Full Name"
-              value={fullName}
-              onChangeText={setFullName}
+              value={name}
+              onChangeText={setName}
               style={{ backgroundColor: '#f3f4f6', borderWidth: 1, borderColor: '#d1d5db', borderRadius: 5, paddingHorizontal: 10, paddingVertical: 12, marginBottom: 15 }}
             />
             </View>
@@ -91,9 +91,9 @@ export default function RegisterPage({ navigation }) {
             <View className="pb-2">
              <FloatingLabelInput
               label="Contact Number"
-              value={contactNumber}
+              value={contact}
               keyboardType="numeric"
-              onChangeText={setContactNumber}
+              onChangeText={setContact}
               style={{ backgroundColor: '#f3f4f6', borderWidth: 1, borderColor: '#d1d5db', borderRadius: 5, paddingHorizontal: 10, paddingVertical: 12, marginBottom: 15 }}
             />
             </View>
@@ -129,8 +129,9 @@ export default function RegisterPage({ navigation }) {
               <View className="w-fit py-2 rounded-md bg-primary text-primary ">
                 <Button
                   color="#ffff"
-                  title="Register"
-                  onPress={handleRegister}
+                  title={isLoading ? 'Register in...' : 'Register'}
+                  disabled={isLoading}
+                  onPress={() => register( name, contact, email, password, passwordConfirmation )}
                   />
               </View>
               <View className="w-full rounded-md flex flex-row ">

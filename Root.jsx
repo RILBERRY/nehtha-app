@@ -13,15 +13,31 @@ import { NavigationContainer } from '@react-navigation/native';
 import * as SecureStore from 'expo-secure-store';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import LogoutPage from './pages/LogoutPage';
+import CreateMemoPage from './pages/CreateMemoPage';
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
+
+function NavStack() {
+  return (
+    <Drawer.Navigator initialRouteName="Login"  >
+      <Drawer.Screen name="Home" component={HomePage} />
+      <Drawer.Screen name="Memo" component={MemoPage} />
+      <Drawer.Screen name="Logout" component={LogoutPage} />
+    </Drawer.Navigator>
+  );
+}
 
 const AuthStackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions = {{ headerShown:false, headerBackTitleVisible:false }}
     >
+      <Stack.Screen
+        name="CreateMemo"
+        component={CreateMemoPage}
+        options={{  headerShown:false }}
+      />
       <Stack.Screen
         name="Login"
         component={LoginPage}
@@ -45,6 +61,7 @@ const AuthStackNavigator = () => {
     </Stack.Navigator>
   )
 }
+
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -81,12 +98,16 @@ export default function App() {
     <>
     { user ? (
     <NavigationContainer >
-      <Drawer.Navigator initialRouteName="Login"  className="bg-red-500">
-        <Drawer.Screen name="Home" component={HomePage} />
-        <Drawer.Screen name="Memo" component={MemoPage} />
-        <Drawer.Screen name="Logout" component={LogoutPage} />
-      </Drawer.Navigator>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="NavStack"
+          component={NavStack}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name="CreateMemo" component={CreateMemoPage} />
+      </Stack.Navigator>
     </NavigationContainer>
+
     ) : (
       <NavigationContainer >
         <AuthStackNavigator/>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const instnce = axios.create({
-    baseUrl : '',
+const instance = axios.create({
+    baseURL: 'https://nehtha.com/api',
 });
 
-export default instnce;
+export default instance;

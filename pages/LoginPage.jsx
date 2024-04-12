@@ -6,17 +6,18 @@ import {
   KeyboardAvoidingView,
   Text,
   ScrollView,
-  View,
+  View
 } from "react-native";
 import { FloatingLabelInput } from "react-native-floating-label-input";
 import { AuthContext } from "../context/AuthProvider";
+
 
 export default function LoginPage({ navigation }) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [keyboardOffset, setKeyboardOffset] = useState(0);
-  const {login} = useContext(AuthContext);
+  const {login, error, isLoading} = useContext(AuthContext);
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -29,7 +30,6 @@ export default function LoginPage({ navigation }) {
     const keyboardDidHideListener = Keyboard.addListener(
       "keyboardDidHide",
       () => {
-        console.log("in", keyboardOffset);
         setKeyboardOffset(0);
       }
     );
@@ -92,6 +92,13 @@ export default function LoginPage({ navigation }) {
                 </Text>
               </View>
             </View>
+            {error &&
+              <View className="w-fit  rounded-md flex flex-row ">
+                <Text className="my-auto text-red-600">
+                  {error}
+                </Text>
+              </View>
+              }
             <View className="pb-2">
               <FloatingLabelInput
                 label="Email"
@@ -128,7 +135,10 @@ export default function LoginPage({ navigation }) {
 
             <View className="flex flex-col gap-2 justify-end">
               <View className="w-fit py-2 rounded-md bg-primary text-primary ">
-                <Button color="#ffff" title="Login" onPress={() => login(email, password)} />
+                <Button color="#ffff"
+                title={isLoading ? 'Logging in...' : 'Login'}
+                disabled={isLoading}
+                onPress={() => login(email, password)} />
               </View>
               <View className="w-fit flex flex-row justify-end ">
                 <Button

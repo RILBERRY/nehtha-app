@@ -71,7 +71,8 @@ export const AuthProvider = ({ children }) => {
         logout: async () => {
             setIsLoading(true);
             axiosConfig.defaults.headers.common = {
-                Authorization: `Bearer ${user.token}`,
+              Accept: 'application/json',
+              Authorization: `Bearer ${user.token}`,
             };
             axiosConfig.post('/logout').then(response => {
               setUser(null);

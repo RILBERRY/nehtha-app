@@ -1,4 +1,4 @@
-import { View} from 'react-native';
+import { Button, Text, View} from 'react-native';
 import { AuthContext } from '../context/AuthProvider';
 import { useContext, useEffect } from 'react';
 

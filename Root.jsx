@@ -34,11 +34,6 @@ const AuthStackNavigator = () => {
       screenOptions = {{ headerShown:false, headerBackTitleVisible:false }}
     >
       <Stack.Screen
-        name="CreateMemo"
-        component={CreateMemoPage}
-        options={{  headerShown:false }}
-      />
-      <Stack.Screen
         name="Login"
         component={LoginPage}
         options={{  headerShown:false }}
@@ -67,11 +62,10 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const { user, setUser } = useContext(AuthContext);
   useEffect(()=>{
-
     SecureStore.getItemAsync('user')
     .then(userString => {
       if(userString){
-        setUser('test');
+        setUser(JSON.parse(userString));
       }
       setIsLoading(false);
     })
@@ -100,7 +94,7 @@ export default function App() {
     <NavigationContainer >
       <Stack.Navigator>
         <Stack.Screen
-          name="NavStack"
+          name=" "
           component={NavStack}
           options={{ headerShown: false }}
         />

@@ -31,7 +31,7 @@ export default function MemoPage({ navigation }) {
     }
   };
   useEffect(() => {
-    fetchMemos();
+    // fetchMemos();
     console.log(memosData);
   }, []);
 

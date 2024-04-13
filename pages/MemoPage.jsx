@@ -32,7 +32,6 @@ export default function MemoPage({ navigation }) {
   };
   useEffect(() => {
     // fetchMemos();
-    console.log(memosData);
   }, []);
 
   const handleRefresh = () => {

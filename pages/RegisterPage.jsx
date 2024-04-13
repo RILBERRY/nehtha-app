@@ -17,12 +17,9 @@ export default function RegisterPage({ navigation }) {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       ({ endCoordinates }) => {
-          setKeyboardOffset(250);
-
-
+        setKeyboardOffset(250);
       }
     );
-
     const keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       () => {
@@ -30,8 +27,6 @@ export default function RegisterPage({ navigation }) {
         setKeyboardOffset(0);
       }
     );
-
-
     return () => {
       keyboardDidShowListener.remove();
       keyboardDidHideListener.remove();

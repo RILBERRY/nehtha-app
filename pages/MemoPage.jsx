@@ -47,7 +47,7 @@ export default function MemoPage({ navigation }) {
         {isLoading ? (
           <ActivityIndicator size="large" color="gray" />
         ):(
-        <View className="flex flex-1 w-full p-4 bg-gray-100">
+        <View className="flex flex-1 w-full p-4">
           <FlatList
             data={memosData}
             renderItem={renderItem}

@@ -9,18 +9,20 @@ import ResetPasswordPage from './pages/ResetPasswordPage';
 import { AuthContext} from './context/AuthProvider';
 import { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, View} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer} from '@react-navigation/native';
 import * as SecureStore from 'expo-secure-store';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import LogoutPage from './pages/LogoutPage';
 import CreateMemoPage from './pages/CreateMemoPage';
+import { useTheme } from './context/ThemeProvider';
+import CustomNavComponent from './components/CustomNavComponent';
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
 function NavStack() {
   return (
-    <Drawer.Navigator initialRouteName="Login"  >
+    <Drawer.Navigator initialRouteName="Login" drawerContent={(props) => <CustomNavComponent {...props} />}>
       <Drawer.Screen name="Home" component={HomePage} />
       <Drawer.Screen name="Memo" component={MemoPage} />
       <Drawer.Screen name="Logout" component={LogoutPage} />
@@ -57,8 +59,9 @@ const AuthStackNavigator = () => {
   )
 }
 
-
 export default function App() {
+  const AppTheme = useTheme();
+
   const [isLoading, setIsLoading] = useState(true);
   const { user, setUser } = useContext(AuthContext);
   useEffect(()=>{
@@ -91,7 +94,7 @@ export default function App() {
   return (
     <>
     { user ? (
-    <NavigationContainer >
+    <NavigationContainer theme={AppTheme} >
       <Stack.Navigator>
         <Stack.Screen
           name=" "

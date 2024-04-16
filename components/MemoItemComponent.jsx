@@ -1,8 +1,10 @@
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useTheme } from '../context/ThemeProvider';
 
 const MemoItem = ({ memo }) => {
+  const AppTheme = useTheme();
   return (
-    <TouchableOpacity className="p-5 bg-white mb-4 shadow-sm rounded-lg">
+    <TouchableOpacity className="p-5 mb-4 shadow-sm rounded-lg " style={{backgroundColor: AppTheme.colors.listItem, borderColor: AppTheme.colors.borderColor }} >
       <Text style={styles.title}>{memo.memo_no}</Text>
       <Text style={styles.date}>{memo.created_at}</Text>
       <Text style={styles.details}>

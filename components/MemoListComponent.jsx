@@ -5,7 +5,7 @@ const MemoList = ({ memos }) => {
   const renderItem = ({ item }) => <MemoItem memo={item} />; // Render each memo item using MemoItem component
 
   return (
-    <View className="flex flex-1 w-full p-4 bg-gray-100">
+    <View className="flex flex-1 w-full p-4">
 
         <FlatList
         data={memos} // Data array containing memo objects

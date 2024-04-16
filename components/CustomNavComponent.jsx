@@ -1,21 +1,64 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
-import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
-import { useTheme } from '../context/ThemeProvider';
+import { View, Text, StyleSheet, Image } from "react-native";
+import {
+  DrawerContentScrollView,
+  DrawerItemList,
+} from "@react-navigation/drawer";
+import { useTheme } from "../context/ThemeProvider";
+import { AuthContext } from "../context/AuthProvider";
+import { useContext, useEffect } from "react";
+import * as SecureStore from "expo-secure-store";
 
 const CustomNavComponent = (props) => {
-    const AppTheme = useTheme();
+  const { user, setUser } = useContext(AuthContext);
+  const AppTheme = useTheme();
+  useEffect(() => {
+    SecureStore.getItemAsync("user")
+      .then((userString) => {
+        if (userString) {
+          setUser(JSON.parse(userString));
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    setTimeout(() => {}, 1000);
+  }, []);
   return (
     <DrawerContentScrollView {...props}>
       {/* Custom header */}
-      <View style={styles.header}>
-        <View className="h-[80px] pt-2 pb-4 flex flex-row justify-start items-center space-x-4">
-              <Image
-                style={{ width: "20%", height: "100%", resizeMode: "cover" }}
-                source={require("../images/logo-white.png")}
-              />
-              <Text style={{color: AppTheme.colors.text }} className="text-2xl font-bold" >Nehtha</Text>
-            </View>
+      <View className="px-2">
+        <View className="h-[80px] pt-2 flex flex-row justify-start items-center space-x-4">
+          <Image
+            style={{ width: "20%", height: "75%", resizeMode: "cover" }}
+            source={require("../images/logo-white.png")}
+          />
+          <Text
+            style={{ color: AppTheme.colors.text }}
+            className="text-2xl font-bold"
+          >
+            Nehtha
+          </Text>
+        </View>
+      </View>
 
+      <View className="w-full flex pb-4">
+        <View className="h-32 w-32 mx-auto">
+          <Image
+            style={{ width: "100%", height: "100%", resizeMode: "cover" }}
+            className="rounded-2xl"
+            source={require("../images/default_pp.png")}
+          />
+        </View>
+        <Text
+          style={{ color: AppTheme.colors.text }}
+          className="text-2xl text-center pt-2 font-bold"
+        >
+          {user.name}
+        </Text>
+        <Text style={{ color: AppTheme.colors.text }} className=" text-center ">
+          {user.email}
+        </Text>
       </View>
 
       {/* Drawer items */}
@@ -36,17 +79,17 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   footer: {
     borderTopWidth: 1,
-    borderColor: 'lightgray',
+    borderColor: "lightgray",
     paddingVertical: 20,
     paddingHorizontal: 16,
   },
   footerText: {
     fontSize: 16,
-    color: 'blue',
+    color: "blue",
   },
 });
 

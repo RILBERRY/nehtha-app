@@ -43,7 +43,7 @@ const CustomNavComponent = (props) => {
       </View>
 
       <View className="w-full flex pb-4">
-        <View className="h-32 w-32 mx-auto">
+        <View className="h-36 w-36 mx-auto bg-white rounded-2xl">
           <Image
             style={{ width: "100%", height: "100%", resizeMode: "cover" }}
             className="rounded-2xl"

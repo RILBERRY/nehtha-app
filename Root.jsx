@@ -1,5 +1,6 @@
 import "react-native-gesture-handler";
 import { createStackNavigator } from "@react-navigation/stack";
+import { Ionicons } from "react-native-vector-icons";
 import HomePage from "./pages/HomePage";
 import MemoPage from "./pages/MemoPage";
 import LoginPage from "./pages/LoginPage";
@@ -31,10 +32,62 @@ function NavStack() {
       }}
       drawerContent={(props) => <CustomNavComponent {...props} />}
     >
-      <Drawer.Screen name="Home" component={HomePage} />
-      <Drawer.Screen name="Memo" component={MemoPage} />
-      <Drawer.Screen name="Setting" component={SettingPage} />
-      <Drawer.Screen name="Logout" component={LogoutPage} />
+      <Drawer.Screen
+        name="Home"
+        component={HomePage}
+        options={{
+          title: "Home",
+          drawerIcon: ({ focused, color, size }) => (
+            <Ionicons
+              name={focused ? "home" : "home-outline"}
+              size={size}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Memo"
+        component={MemoPage}
+        options={{
+          title: "Memo",
+          drawerIcon: ({ focused, color, size }) => (
+            <Ionicons
+              name={focused ? "reader" : "reader-outline"}
+              size={size}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Setting"
+        component={SettingPage}
+        options={{
+          title: "Setting",
+          drawerIcon: ({ focused, color, size }) => (
+            <Ionicons
+              name={focused ? "settings" : "settings-outline"}
+              size={size}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Logout"
+        component={LogoutPage}
+        options={{
+          title: "Logout",
+          drawerIcon: ({ focused, color, size }) => (
+            <Ionicons
+              name={focused ? "log-out" : "log-out-outline"}
+              size={size}
+              color={color}
+            />
+          ),
+        }}
+      />
     </Drawer.Navigator>
   );
 }

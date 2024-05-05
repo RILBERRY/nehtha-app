@@ -1,7 +1,9 @@
 import { View, FlatList, StyleSheet} from 'react-native';
 import MemoItem from '../components/MemoItemComponent';
+import { useTheme } from '../context/ThemeProvider';
 
 const MemoList = ({ memos }) => {
+  const AppTheme = useTheme();
   const renderItem = ({ item }) => <MemoItem memo={item} />; // Render each memo item using MemoItem component
 
   return (

@@ -3,9 +3,10 @@ import { useContext, useEffect, useState } from "react";
 import axiosConfig from "../services/axiosConfig";
 import { AuthContext } from '../context/AuthProvider';
 import MemoItem from '../components/MemoItemComponent';
+import { useTheme } from '../context/ThemeProvider';
 
 export default function MemoPage({ navigation }) {
-
+  const AppTheme = useTheme();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);

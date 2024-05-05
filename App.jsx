@@ -4,12 +4,17 @@ import Root from "./Root"
 import * as SecureStore from "expo-secure-store";
 
 import { CustomDarkTheme, CustomDefaultTheme } from "./AppTheme";
+import { useState } from "react";
 
 export default function App(){
+  const [systemTheme, setSystemTheme] = useState('light') ;
+  const [isLoading, setIsLoading] = useState(false) ;
+
   SecureStore.getItemAsync("systemTheme")
-      .then((userString) => {
-        if (userString) {
-          setUser(JSON.parse(userString));
+      .then((systemThemeString) => {
+        console.log(systemThemeString, 'here');
+        if (systemThemeString) {
+          setSystemTheme(systemThemeString);
         }
         setIsLoading(false);
       })
@@ -17,8 +22,6 @@ export default function App(){
         console.log(err);
         setIsLoading(false);
       });
-  const systemTheme = 'light';
-  // const systemTheme = useColorScheme();
   const AppTheme = systemTheme === 'dark' ? CustomDarkTheme : CustomDefaultTheme;
   return (
     <AuthProvider>

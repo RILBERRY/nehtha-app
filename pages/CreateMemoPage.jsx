@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   View,
   Text,
@@ -11,25 +11,32 @@ import {
 import { FloatingLabelInput } from "react-native-floating-label-input";
 
 export default function CreateMemoPage() {
-  const [patientID, setPatientID] = useState("");
-  const [patientName, setPatientName] = useState("");
-  const [referenceCode, setReferenceCode] = useState("");
-  const [contactNo, setContactNo] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [memoType, setMemoType] = useState(null);
-  const [medicineName, setMedicineName] = useState("");
+  const [formData, setFormData] = useState({
+    patientID: "",
+    patientName: "",
+    referenceCode: "",
+    contactNo: "",
+    memoType: null,
+    medicineName: ""
+  });
 
-  const selectMemoType = (choosenMemoType) => {
-    setMemoType(choosenMemoType);
-  };
-  const handleSaveMemo = () => {
-    setIsLoading(true);
-    console.log("Memo saved!");
-  };
+    const selectMemoType = (choosenMemoType) => {
+      handleChange( 'memoType', choosenMemoType);
+    };
 
-  useEffect(() => {
-    // Add any necessary useEffect logic here
-  }, []);
+    const handleChange = (name, value) => {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    };
+
+    const handleSaveMemo = () => {
+      setIsLoading(true);
+      console.log(formData);
+      console.log("Memo saved!");
+    };
 
   return (
     <KeyboardAvoidingView
@@ -44,7 +51,7 @@ export default function CreateMemoPage() {
         <Text className="text-xl font-bold mb-4">What Are You Looking for</Text>
         <TouchableOpacity
           className="p-4 rounded-lg mb-4 border border-primary"
-          style={[memoType === "for-prescription" && styles.selectedMemoButton]}
+          style={[formData.memoType === "for-prescription" && styles.selectedMemoButton]}
           onPress={() => selectMemoType("for-prescription")}
         >
           <Text className="text-xl font-bold text-primary">
@@ -57,7 +64,7 @@ export default function CreateMemoPage() {
 
         <TouchableOpacity
           className="p-4 rounded-lg mb-4 border border-primary"
-          style={[memoType === "for-medicine" && styles.selectedMemoButton]}
+          style={[formData.memoType === "for-medicine" && styles.selectedMemoButton]}
           onPress={() => selectMemoType("for-medicine")}
         >
           <Text className="text-xl font-bold text-primary">For Medicine</Text>
@@ -66,37 +73,37 @@ export default function CreateMemoPage() {
           </Text>
         </TouchableOpacity>
 
-        {memoType === "for-prescription" && (
+        {formData.memoType === "for-prescription" && (
           <View>
             <View className="pb-2">
               <FloatingLabelInput
                 label="Patient National ID No"
-                value={patientID}
-                onChangeText={setPatientID}
+                value={formData.patientID}
+                onChangeText={(text) => handleChange('patientID', text)}
                 style={styles.input}
               />
             </View>
             <View className="pb-2">
               <FloatingLabelInput
                 label="Patient Full Name"
-                value={patientName}
-                onChangeText={setPatientName}
+                value={formData.patientName}
+                onChangeText={(text) => handleChange('patientName', text)}
                 style={styles.input}
               />
             </View>
             <View className="pb-2">
               <FloatingLabelInput
                 label="Reference code (eg: PR/00000/2024/0031)"
-                value={referenceCode}
-                onChangeText={setReferenceCode}
+                value={formData.referenceCode}
+                onChangeText={(text) => handleChange('referenceCode', text)}
                 style={styles.input}
               />
             </View>
             <View className="pb-2">
               <FloatingLabelInput
                 label="Contact No"
-                value={contactNo}
-                onChangeText={setContactNo}
+                value={formData.contactNo}
+                onChangeText={(text) => handleChange('contactNo', text)}
                 style={styles.input}
               />
             </View>
@@ -106,13 +113,13 @@ export default function CreateMemoPage() {
           </View>
         )}
 
-        {memoType === "for-medicine" && (
+        {formData.memoType === "for-medicine" && (
           <View>
             <View className="pb-2">
               <FloatingLabelInput
                 label="Medicine Name"
-                value={medicineName}
-                onChangeText={setMedicineName}
+                value={formData.medicineName}
+                onChangeText={(text) => handleChange('medicineName', text)}
                 style={styles.input}
               />
             </View>

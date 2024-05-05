@@ -23,7 +23,7 @@ const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 function NavStack() {
-  const AppTheme = useTheme();
+  // const AppTheme = useTheme();
   return (
     <Drawer.Navigator
       initialRouteName="Login"

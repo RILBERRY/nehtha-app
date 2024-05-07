@@ -1,9 +1,10 @@
-import { ActivityIndicator, FlatList, Image, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, FlatList, TouchableOpacity, View } from 'react-native';
 import { useContext, useEffect, useState } from "react";
 import axiosConfig from "../services/axiosConfig";
 import { AuthContext } from '../context/AuthProvider';
 import MemoItem from '../components/MemoItemComponent';
 import { useTheme } from '../context/ThemeProvider';
+import { Image } from 'react-native';
 
 export default function MemoPage({ navigation }) {
   const AppTheme = useTheme();
@@ -22,6 +23,8 @@ export default function MemoPage({ navigation }) {
       };
       const response = await axiosConfig.get('/memos');
       setMemosData(response.data.data);
+      console.log(response.data.data);
+
       setError(null);
     } catch (error) {
       console.log(error.response.data.message);
@@ -40,6 +43,11 @@ export default function MemoPage({ navigation }) {
     fetchMemos();
 
   }
+  const handleCreateMemo = () => {
+    console.log('Button pressed and function executed');
+    navigation.navigate('CreateMemo');
+  };
+
   const renderItem = ({ item }) => <MemoItem memo={item} />;
 
   return (
@@ -59,16 +67,24 @@ export default function MemoPage({ navigation }) {
 
         </View>
         )}
-
-      <TouchableOpacity className=" absolute w-16 h-16 bottom-10 right-6 bg-secondary text-primary p-2 rounded-[100%]"
-       onPress={() => navigation.navigate('CreateMemo')}
+    {/* <View className=" absolute w-16 h-16 bottom-10 right-6 bg-secondary text-primary p-2 rounded-[100%]">
+        <TouchableOpacity
+          style={{ paddingVertical: 10, paddingHorizontal: 20, borderRadius: 20, backgroundColor: 'lightgray' }}
+          onPress={handleCreateMemo}
+        >
+          <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'black' }}>
+            test
+          </Text>
+        </TouchableOpacity>
+      </View> */}
+      <TouchableOpacity className=" absolute w-16 h-16 bottom-10 right-6 bg-secondary text-primary p-2 rounded-full "
+       onPress={handleCreateMemo}
       >
         <Image
           style={{ width: "100%", height: "100%", resizeMode: "cover" }}
           source={require("../images/add.png")}
         />
       </TouchableOpacity>
-
     </View>
   );
 }

@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "nehtha-app",
+    "name": "Nehtha",
     "slug": "nehtha-app",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -16,14 +16,14 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.a.rilwan.nehthaapp"
+      "bundleIdentifier": "com.a.rilwan.nehtha"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.a.rilwan.nehthaapp"
+      "package": "com.a.rilwan.nehtha"
     },
     "web": {
       "favicon": "./assets/favicon.png"

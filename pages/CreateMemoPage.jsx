@@ -2,15 +2,16 @@ import { useState } from "react";
 import {
   View,
   Text,
-  Button,
   TouchableOpacity,
   StyleSheet,
   ScrollView,
   KeyboardAvoidingView
 } from "react-native";
 import { FloatingLabelInput } from "react-native-floating-label-input";
+import { useTheme } from "../context/ThemeProvider";
 
 export default function CreateMemoPage() {
+  const AppTheme = useTheme();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     patientID: "",
@@ -42,7 +43,7 @@ export default function CreateMemoPage() {
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior="padding"
-      className="bg-white m-4 rounded-lg pt-5"
+      className=" m-4 rounded-lg pt-5"
     >
       <ScrollView
         contentContainerStyle={styles.scrollViewContent}
@@ -126,14 +127,12 @@ export default function CreateMemoPage() {
           </View>
         )}
 
-        <View className="w-fit py-2 rounded-md bg-primary text-primary mb-20">
-          <Button
-            color="#ffff"
-            title={isLoading ? "Creating Memo..." : "Create Memo"}
+        {/* <View className="w-fit py-2 rounded-md bg-primary text-primary mb-20"> */}
+        <TouchableOpacity className=" w-fit py-2 rounded-md bg-primary mb-20 "
             disabled={isLoading}
             onPress={handleSaveMemo}
-          />
-        </View>
+          ><Text className="text-white text-center p-2">{isLoading ? "Creating Memo..." : "Create Memo"}</Text></TouchableOpacity>
+        {/* </View> */}
       </ScrollView>
     </KeyboardAvoidingView>
   );

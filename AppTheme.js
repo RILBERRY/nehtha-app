@@ -14,9 +14,11 @@ export const CustomDefaultTheme = {
     textSecondary: '#1E7B7B',
     tintColor: 'white',
     listItem: '#ffffff',
-    borderColor: 'gray',
-    // border: 'rgb(199, 199, 204)',
-    // notification: 'rgb(255, 69, 58)',
+    listItemText: 'black',
+  },
+  status: {
+    requestedText: 'red',
+    requestedBg: 'orange',
   },
 };
 
@@ -27,13 +29,15 @@ export const CustomDarkTheme = {
     // background: 'transparent',
     primary: '#ADEBEB',
     secondary: '#ADEBEB',
-    // card: '#1E7B7B',
-    text: '#1E7B7B',
+    card: '#1E7B7B',
+    text: 'white',
     textSecondary: 'white',
     listItem: 'rgba(255, 255, 255,.15)',
-    borderColor: 'gray',
+    listItemText: 'white',
 
-    // border: 'rgb(199, 199, 204)',
-    // notification: 'rgb(255, 69, 58)',
+  },
+  status: {
+    requestedText: 'red',
+    requestedBg: 'orange',
   },
 };

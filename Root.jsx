@@ -15,6 +15,7 @@ import * as SecureStore from "expo-secure-store";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import LogoutPage from "./pages/LogoutPage";
 import CreateMemoPage from "./pages/CreateMemoPage";
+import ViewMemoPage from "./pages/ViewMemoPage";
 import { useTheme } from "./context/ThemeProvider";
 import CustomNavComponent from "./components/CustomNavComponent";
 import SettingPage from "./pages/SettingPage";
@@ -163,6 +164,7 @@ export default function App() {
               options={{ headerShown: false }}
             />
             <Stack.Screen name="CreateMemo" component={CreateMemoPage} />
+            <Stack.Screen name="ViewMemo" component={ViewMemoPage} />
           </Stack.Navigator>
         </NavigationContainer>
       ) : (

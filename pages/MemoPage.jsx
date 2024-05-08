@@ -23,8 +23,6 @@ export default function MemoPage({ navigation }) {
       };
       const response = await axiosConfig.get('/memos');
       setMemosData(response.data.data);
-      console.log(response.data.data);
-
       setError(null);
     } catch (error) {
       console.log(error.response.data.message);
@@ -43,12 +41,8 @@ export default function MemoPage({ navigation }) {
     fetchMemos();
 
   }
-  const handleCreateMemo = () => {
-    console.log('Button pressed and function executed');
-    navigation.navigate('CreateMemo');
-  };
 
-  const renderItem = ({ item }) => <MemoItem memo={item} />;
+  const renderItem = ({ item }) => <MemoItem memo={item} navigation={navigation} />;
 
   return (
 
@@ -78,7 +72,7 @@ export default function MemoPage({ navigation }) {
         </TouchableOpacity>
       </View> */}
       <TouchableOpacity className=" absolute w-16 h-16 bottom-10 right-6 bg-secondary text-primary p-2 rounded-full "
-       onPress={handleCreateMemo}
+       onPress={()=> {navigation.navigate('CreateMemo')}}
       >
         <Image
           style={{ width: "100%", height: "100%", resizeMode: "cover" }}

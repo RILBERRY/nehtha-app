@@ -1,7 +1,7 @@
 import { Text, TouchableOpacity, StyleSheet, View } from "react-native";
 import { useTheme } from "../context/ThemeProvider";
 
-const MemoItem = ({ memo }) => {
+const MemoItem = ({ memo, navigation }) => {
   const AppTheme = useTheme();
   return (
     <TouchableOpacity
@@ -10,6 +10,7 @@ const MemoItem = ({ memo }) => {
         backgroundColor: AppTheme.colors.listItem,
         borderColor: AppTheme.colors.borderColor,
       }}
+      onPress={()=> {navigation.navigate('ViewMemo', {memo:memo})}}
     >
       <Text style={{ ...styles.title, color: AppTheme.colors.listItemText }}>
         {memo.memo_no}

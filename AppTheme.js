@@ -6,7 +6,7 @@ export const CustomDefaultTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: 'transparent',
+    background: 'white',
     primary: '#ADEBEB',
     secondary: '#ADEBEB',
     card: '#1E7B7B',
@@ -26,7 +26,7 @@ export const CustomDarkTheme = {
   ...DarkTheme,
   colors: {
     ...DarkTheme.colors,
-    // background: 'transparent',
+    background: 'black',
     primary: '#ADEBEB',
     secondary: '#ADEBEB',
     card: '#1E7B7B',

@@ -129,16 +129,16 @@ export default function App() {
   const { user, setUser } = useContext(AuthContext);
   useEffect(() => {
     SecureStore.getItemAsync("user")
-      .then((userString) => {
-        if (userString) {
-          setUser(JSON.parse(userString));
-        }
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsLoading(false);
-      });
+    .then((userString) => {
+      if (userString) {
+        setUser(JSON.parse(userString));
+      }
+      setIsLoading(false);
+    })
+    .catch((err) => {
+      console.log(err);
+      setIsLoading(false);
+    });
 
     setTimeout(() => {
       setIsLoading(false);

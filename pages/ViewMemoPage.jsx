@@ -1,16 +1,18 @@
 import {
-  Text,
   StyleSheet,
-  View,
-  TouchableOpacity
+  Text,
+  TouchableOpacity,
+  View
 } from "react-native";
 import { useTheme } from "../context/ThemeProvider";
-import { Ionicons } from "react-native-vector-icons";
 import AllRequestsFilterComponent from "../components/AllRequestsFilterComponent";
 import { useState } from "react";
+import { Ionicons } from "react-native-vector-icons";
+
 
 export default function ViewMemoPage({ route }) {
   const AppTheme = useTheme();
+  const { memo } = route.params;
   const [filters, setFilters] = useState(null);
   const renderItem = ({ item }) => <AllRequestsFilterComponent filter={filters} />; // Render each memo item using MemoItem component
 

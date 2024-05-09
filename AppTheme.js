@@ -15,6 +15,7 @@ export const CustomDefaultTheme = {
     tintColor: 'white',
     listItem: '#ffffff',
     listItemText: 'black',
+    fadeText: '#888B8C',
   },
   status: {
     requestedText: 'red',
@@ -34,6 +35,7 @@ export const CustomDarkTheme = {
     textSecondary: 'white',
     listItem: 'rgba(255, 255, 255,.15)',
     listItemText: 'white',
+    fadeText: '#888B8C',
 
   },
   status: {

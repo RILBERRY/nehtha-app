@@ -1,7 +1,22 @@
 import { Text, TouchableOpacity, StyleSheet, View } from "react-native";
 import { useTheme } from "../context/ThemeProvider";
 
+
 const MemoItem = ({ memo, navigation }) => {
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: true
+    })
+  }
   const AppTheme = useTheme();
   return (
     <TouchableOpacity
@@ -15,8 +30,8 @@ const MemoItem = ({ memo, navigation }) => {
       <Text style={{ ...styles.title, color: AppTheme.colors.listItemText }}>
         {memo.memo_no}
       </Text>
-      <Text style={{ ...styles.date, color: AppTheme.colors.listItemText }}>
-        {memo.created_at}
+      <Text style={{ ...styles.date, color: AppTheme.colors.fadeText }}>
+        {formatDate(memo.created_at)}
       </Text>
       <Text style={{ ...styles.details, color: AppTheme.colors.listItemText }}>
         Name: {memo.name} ({memo.national_id_no})

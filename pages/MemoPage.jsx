@@ -5,24 +5,27 @@ import { AuthContext } from '../context/AuthProvider';
 import MemoItem from '../components/MemoItemComponent';
 import { useTheme } from '../context/ThemeProvider';
 import { Image } from 'react-native';
+import * as SecureStore from "expo-secure-store";
 
 export default function MemoPage({ navigation }) {
   const AppTheme = useTheme();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [memosData, setMemosData] = useState(null);
+  const [memoData, setMemoData] = useState(null);
   const { user } = useContext(AuthContext);
 
   const fetchMemos = async () => {
     try {
+      console.log('new fetch request');
       setIsLoading(true);
       axiosConfig.defaults.headers.common = {
         Accept: 'application/json',
         Authorization: `Bearer ${user.token}`,
       };
       const response = await axiosConfig.get('/memos');
-      setMemosData(response.data.data);
+      setMemoData(response.data.data);
+      SecureStore.setItemAsync('memoData', JSON.stringify(memoData));
       setError(null);
     } catch (error) {
       console.log(error.response.data.message);
@@ -32,14 +35,28 @@ export default function MemoPage({ navigation }) {
       setIsRefreshing(false);
     }
   };
+
   useEffect(() => {
     // fetchMemos();
+    SecureStore.getItemAsync("memoData")
+    .then((memoDataString) => {
+      if (memoDataString) {
+        console.log('secure store data');
+        setMemoData(JSON.parse(memoDataString));
+      }else{
+        fetchMemos();
+      }
+      setIsLoading(false);
+    })
+    .catch((err) => {
+      console.log(err);
+      setIsLoading(false);
+    });
   }, []);
 
   const handleRefresh = () => {
     setIsRefreshing(true);
     fetchMemos();
-
   }
 
   const renderItem = ({ item }) => <MemoItem memo={item} navigation={navigation} />;
@@ -52,7 +69,7 @@ export default function MemoPage({ navigation }) {
         ):(
         <View className="flex flex-1 w-full p-4">
           <FlatList
-            data={memosData}
+            data={memoData}
             renderItem={renderItem}
             keyExtractor={(item) => item.id.toString()}
             refreshing={isRefreshing}

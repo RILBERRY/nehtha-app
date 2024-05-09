@@ -1,11 +1,15 @@
 import { useState, useEffect} from 'react';
-import { Button, Text, TouchableOpacity, View } from 'react-native';
+import { Switch, Text, TouchableOpacity, View } from 'react-native';
 import * as SecureStore from "expo-secure-store";
+import { useTheme } from '../context/ThemeProvider';
+import { Button } from 'react-native';
 
 export default function SettingPage({ navigation }) {
+  const AppTheme = useTheme();
   const [isLoading, setIsLoading] = useState(false);
   const [isToggled, setIsToggled] = useState(false);
   const [systemTheme, setSystemTheme] = useState('light');
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
 
   useEffect(() => {
     // Fetch the system theme from SecureStore when the component mounts
@@ -23,42 +27,110 @@ export default function SettingPage({ navigation }) {
       });
   }, []); // Empty dependency array ensures this effect runs only once on mount
 
-  const handlePress = () => {
+  const handleThemeToggle = () => {
     const newTheme = isToggled ? 'light' : 'dark'; // Determine the new theme based on the toggle state
     setSystemTheme(newTheme); // Update the system theme state
     setIsToggled(!isToggled); // Update the toggle state
     console.log(newTheme);
     // Save the selected theme to SecureStore
-    SecureStore.setItemAsync('systemTheme', newTheme)
-    .then(() => {
-      return () => {
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000); // Add a delay if needed to ensure the theme change is applied
-      };
-    }
-  )
-    .catch((err) => console.log('Error updating theme:', err));
+    SecureStore.setItemAsync('systemTheme', newTheme);
+  };
+  const handleNotificationsToggle = () => {
+    setNotificationsEnabled(!notificationsEnabled);
+    // You can add logic here to enable/disable notifications
+  };
 
+  const handleLanguageChange = () => {
+    // Logic for changing the language of the app
+  };
+
+  const handleAccountSettings = () => {
+    // Navigate to account settings screen
+  };
+
+  const handlePrivacyAndSecurity = () => {
+    // Navigate to privacy and security settings screen
+  };
+
+  const handleCheckUpdates = async () => {
+    // Logic for checking updates
+    try {
+      const supported = await Linking.canOpenURL('market://details?id=com.yourapp.package');
+      if (supported) {
+        await Linking.openURL('market://details?id=com.yourapp.package');
+      } else {
+        console.log("Can't handle url: App not installed");
+      }
+    } catch (error) {
+      console.error('An error occurred', error);
+    }
+  };
+
+  const handleHelpAndSupport = () => {
+    // Navigate to help and support screen
+  };
+
+  const handleFeedback = () => {
+    // Navigate to feedback screen or open feedback form
   };
 
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ flex: 1 }}>
+      <Text style={{ fontSize: 20, marginBottom: 20, color: AppTheme.colors.listItemText }}>Settings</Text>
+
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+        <Text style={{color: AppTheme.colors.listItemText }}>Dark Theme</Text>
+        <Switch
+          value={isToggled}
+          onValueChange={handleThemeToggle}
+        />
+      </View>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+        <Text>Notifications</Text>
+        <Switch
+          value={notificationsEnabled}
+          onValueChange={handleNotificationsToggle}
+        />
+      </View>
+
+      <TouchableOpacity onPress={handleLanguageChange}>
+        <Text style={{ marginBottom: 10 }}>Change Language</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={handleAccountSettings}>
+        <Text style={{ marginBottom: 10 }}>Account Settings</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={handlePrivacyAndSecurity}>
+        <Text style={{ marginBottom: 10 }}>Privacy and Security</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={handleCheckUpdates}>
+        <Text style={{ marginBottom: 10 }}>Check for Updates</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={handleHelpAndSupport}>
+        <Text style={{ marginBottom: 10 }}>Help and Support</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={handleFeedback}>
+        <Text style={{ marginBottom: 10 }}>Feedback</Text>
+      </TouchableOpacity>
+
+
       <Button
         onPress={() => navigation.navigate('Notifications')}
-        title="Change Theme"
+        title="Go to Notifications"
       />
-      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-        <TouchableOpacity
-          style={{ paddingVertical: 10, paddingHorizontal: 20, borderRadius: 20, backgroundColor: 'lightgray' }}
-          onPress={handlePress}
-        >
-          <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'black' }}>
-            {isToggled ? 'Light' : 'Dark'}
-          </Text>
-        </TouchableOpacity>
+
+
+    {/* </View> */}
+      <View className="absolute bottom-7 w-full">
+        <Text className="text-center" >App Version: 1.0.0</Text>
       </View>
     </View>
+
+
   );
 }

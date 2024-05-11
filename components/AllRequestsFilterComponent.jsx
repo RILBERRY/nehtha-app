@@ -1,8 +1,12 @@
-import { View} from "react-native";
+import { ScrollView, Text, TouchableOpacity, View} from "react-native";
 import { useTheme } from "../context/ThemeProvider";
+import { useRoute } from "@react-navigation/native";
+import { Ionicons } from "react-native-vector-icons";
 
 const AllRequestsFilterComponent = () => {
+
   const AppTheme = useTheme();
+  const { memo } = useRoute().params;
 
   return (
     <ScrollView className="flex flex-1 w-full p-4">
@@ -17,12 +21,12 @@ const AllRequestsFilterComponent = () => {
         <View>
           <Text
             className="text-lg font-semibold"
-            style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+            style={{  color: AppTheme.colors.listItemText }}
           >
             REQ-2024-001020-0121
           </Text>
           <Text
-            style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+            style={{  color: AppTheme.colors.listItemText }}
           >
             {memo.created_at}
           </Text>
@@ -36,7 +40,7 @@ const AllRequestsFilterComponent = () => {
             />
             <Text
               className="font-semibold"
-              style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+              style={{  color: AppTheme.colors.listItemText }}
             >
               POINT PHARMACY
             </Text>
@@ -44,7 +48,7 @@ const AllRequestsFilterComponent = () => {
           <Text
             className="uppercase text-center font-semibold text-base"
             style={{
-              ...styles.status,
+
               color:
                 memo.status == "requested"
                   ? AppTheme.status.requestedText
@@ -66,12 +70,12 @@ const AllRequestsFilterComponent = () => {
         <View>
           <Text
             className="text-lg font-semibold"
-            style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+            style={{  color: AppTheme.colors.listItemText }}
           >
             REQ-2024-001020-0121
           </Text>
           <Text
-            style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+            style={{  color: AppTheme.colors.listItemText }}
           >
             {memo.created_at}
           </Text>
@@ -85,7 +89,7 @@ const AllRequestsFilterComponent = () => {
             />
             <Text
               className="font-semibold"
-              style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+              style={{  color: AppTheme.colors.listItemText }}
             >
               POINT PHARMACY
             </Text>
@@ -93,7 +97,7 @@ const AllRequestsFilterComponent = () => {
           <Text
             className="uppercase text-center font-semibold text-base"
             style={{
-              ...styles.status,
+
               color:
                 memo.status == "requested"
                   ? AppTheme.status.requestedText
@@ -115,12 +119,12 @@ const AllRequestsFilterComponent = () => {
         <View>
           <Text
             className="text-lg font-semibold"
-            style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+            style={{  color: AppTheme.colors.listItemText }}
           >
             REQ-2024-001020-0121
           </Text>
           <Text
-            style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+            style={{  color: AppTheme.colors.listItemText }}
           >
             {memo.created_at}
           </Text>
@@ -134,7 +138,7 @@ const AllRequestsFilterComponent = () => {
             />
             <Text
               className="font-semibold"
-              style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+              style={{  color: AppTheme.colors.listItemText }}
             >
               POINT PHARMACY
             </Text>
@@ -142,7 +146,7 @@ const AllRequestsFilterComponent = () => {
           <Text
             className="uppercase text-center font-semibold text-base"
             style={{
-              ...styles.status,
+
               color:
                 memo.status == "requested"
                   ? AppTheme.status.requestedText
@@ -164,12 +168,12 @@ const AllRequestsFilterComponent = () => {
         <View>
           <Text
             className="text-lg font-semibold"
-            style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+            style={{  color: AppTheme.colors.listItemText }}
           >
             REQ-2024-001020-0121
           </Text>
           <Text
-            style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+            style={{  color: AppTheme.colors.listItemText }}
           >
             {memo.created_at}
           </Text>
@@ -183,7 +187,7 @@ const AllRequestsFilterComponent = () => {
             />
             <Text
               className="font-semibold"
-              style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+              style={{  color: AppTheme.colors.listItemText }}
             >
               POINT PHARMACY
             </Text>
@@ -191,7 +195,7 @@ const AllRequestsFilterComponent = () => {
           <Text
             className="uppercase text-center font-semibold text-base"
             style={{
-              ...styles.status,
+
               color:
                 memo.status == "requested"
                   ? AppTheme.status.requestedText
@@ -213,12 +217,12 @@ const AllRequestsFilterComponent = () => {
         <View>
           <Text
             className="text-lg font-semibold"
-            style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+            style={{  color: AppTheme.colors.listItemText }}
           >
             REQ-2024-001020-0121
           </Text>
           <Text
-            style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+            style={{  color: AppTheme.colors.listItemText }}
           >
             {memo.created_at}
           </Text>
@@ -232,7 +236,7 @@ const AllRequestsFilterComponent = () => {
             />
             <Text
               className="font-semibold"
-              style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+              style={{  color: AppTheme.colors.listItemText }}
             >
               POINT PHARMACY
             </Text>
@@ -240,7 +244,7 @@ const AllRequestsFilterComponent = () => {
           <Text
             className="uppercase text-center font-semibold text-base"
             style={{
-              ...styles.status,
+
               color:
                 memo.status == "requested"
                   ? AppTheme.status.requestedText
@@ -262,12 +266,12 @@ const AllRequestsFilterComponent = () => {
         <View>
           <Text
             className="text-lg font-semibold"
-            style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+            style={{  color: AppTheme.colors.listItemText }}
           >
             REQ-2024-001020-0121
           </Text>
           <Text
-            style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+            style={{  color: AppTheme.colors.listItemText }}
           >
             {memo.created_at}
           </Text>
@@ -281,7 +285,7 @@ const AllRequestsFilterComponent = () => {
             />
             <Text
               className="font-semibold"
-              style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+              style={{  color: AppTheme.colors.listItemText }}
             >
               POINT PHARMACY
             </Text>
@@ -289,7 +293,7 @@ const AllRequestsFilterComponent = () => {
           <Text
             className="uppercase text-center font-semibold text-base"
             style={{
-              ...styles.status,
+
               color:
                 memo.status == "requested"
                   ? AppTheme.status.requestedText
@@ -311,12 +315,12 @@ const AllRequestsFilterComponent = () => {
         <View>
           <Text
             className="text-lg font-semibold"
-            style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+            style={{  color: AppTheme.colors.listItemText }}
           >
             REQ-2024-001020-0121
           </Text>
           <Text
-            style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+            style={{  color: AppTheme.colors.listItemText }}
           >
             {memo.created_at}
           </Text>
@@ -330,7 +334,7 @@ const AllRequestsFilterComponent = () => {
             />
             <Text
               className="font-semibold"
-              style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+              style={{  color: AppTheme.colors.listItemText }}
             >
               POINT PHARMACY
             </Text>
@@ -338,7 +342,7 @@ const AllRequestsFilterComponent = () => {
           <Text
             className="uppercase text-center font-semibold text-base"
             style={{
-              ...styles.status,
+
               color:
                 memo.status == "requested"
                   ? AppTheme.status.requestedText
@@ -360,12 +364,12 @@ const AllRequestsFilterComponent = () => {
         <View>
           <Text
             className="text-lg font-semibold"
-            style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+            style={{  color: AppTheme.colors.listItemText }}
           >
             REQ-2024-001020-0121
           </Text>
           <Text
-            style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+            style={{  color: AppTheme.colors.listItemText }}
           >
             {memo.created_at}
           </Text>
@@ -379,7 +383,7 @@ const AllRequestsFilterComponent = () => {
             />
             <Text
               className="font-semibold"
-              style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+              style={{  color: AppTheme.colors.listItemText }}
             >
               POINT PHARMACY
             </Text>
@@ -387,7 +391,7 @@ const AllRequestsFilterComponent = () => {
           <Text
             className="uppercase text-center font-semibold text-base"
             style={{
-              ...styles.status,
+
               color:
                 memo.status == "requested"
                   ? AppTheme.status.requestedText
@@ -409,12 +413,12 @@ const AllRequestsFilterComponent = () => {
         <View>
           <Text
             className="text-lg font-semibold"
-            style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+            style={{  color: AppTheme.colors.listItemText }}
           >
             REQ-2024-001020-0121
           </Text>
           <Text
-            style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+            style={{  color: AppTheme.colors.listItemText }}
           >
             {memo.created_at}
           </Text>
@@ -428,7 +432,7 @@ const AllRequestsFilterComponent = () => {
             />
             <Text
               className="font-semibold"
-              style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+              style={{  color: AppTheme.colors.listItemText }}
             >
               POINT PHARMACY
             </Text>
@@ -436,7 +440,7 @@ const AllRequestsFilterComponent = () => {
           <Text
             className="uppercase text-center font-semibold text-base"
             style={{
-              ...styles.status,
+
               color:
                 memo.status == "requested"
                   ? AppTheme.status.requestedText
@@ -458,12 +462,12 @@ const AllRequestsFilterComponent = () => {
         <View>
           <Text
             className="text-lg font-semibold"
-            style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+            style={{  color: AppTheme.colors.listItemText }}
           >
             REQ-2024-001020-0121
           </Text>
           <Text
-            style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+            style={{  color: AppTheme.colors.listItemText }}
           >
             {memo.created_at}
           </Text>
@@ -477,7 +481,7 @@ const AllRequestsFilterComponent = () => {
             />
             <Text
               className="font-semibold"
-              style={{ ...styles.title, color: AppTheme.colors.listItemText }}
+              style={{  color: AppTheme.colors.listItemText }}
             >
               POINT PHARMACY
             </Text>
@@ -485,7 +489,7 @@ const AllRequestsFilterComponent = () => {
           <Text
             className="uppercase text-center font-semibold text-base"
             style={{
-              ...styles.status,
+
               color:
                 memo.status == "requested"
                   ? AppTheme.status.requestedText

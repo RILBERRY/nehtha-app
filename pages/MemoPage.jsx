@@ -25,7 +25,6 @@ export default function MemoPage({ navigation }) {
       };
       const response = await axiosConfig.get('/memos');
       setMemoData(response.data.data);
-      SecureStore.setItemAsync('memoData', JSON.stringify(memoData));
       setError(null);
     } catch (error) {
       console.log(error.response.data.message);
@@ -41,8 +40,8 @@ export default function MemoPage({ navigation }) {
     SecureStore.getItemAsync("memoData")
     .then((memoDataString) => {
       if (memoDataString) {
-        console.log('secure store data');
         setMemoData(JSON.parse(memoDataString));
+        console.log('secure store data', memoData);
       }else{
         fetchMemos();
       }
@@ -57,6 +56,7 @@ export default function MemoPage({ navigation }) {
   const handleRefresh = () => {
     setIsRefreshing(true);
     fetchMemos();
+    SecureStore.setItemAsync('memoData', JSON.stringify(memoData));
   }
 
   const renderItem = ({ item }) => <MemoItem memo={item} navigation={navigation} />;

@@ -1,14 +1,13 @@
-import { useState, useEffect} from 'react';
-import { Switch, Text, TouchableOpacity, View } from 'react-native';
+import { useState, useEffect } from "react";
+import { Switch, Text, View } from "react-native";
 import * as SecureStore from "expo-secure-store";
-import { useTheme } from '../context/ThemeProvider';
-import { Button } from 'react-native';
+import { useTheme } from "../context/ThemeProvider";
 
 export default function SettingPage({ navigation }) {
   const AppTheme = useTheme();
   const [isLoading, setIsLoading] = useState(false);
   const [isToggled, setIsToggled] = useState(false);
-  const [systemTheme, setSystemTheme] = useState('light');
+  const [systemTheme, setSystemTheme] = useState("light");
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
 
   useEffect(() => {
@@ -16,7 +15,7 @@ export default function SettingPage({ navigation }) {
     SecureStore.getItemAsync("systemTheme")
       .then((systemThemeString) => {
         if (systemThemeString) {
-          setSystemTheme(systemThemeString)
+          setSystemTheme(systemThemeString);
           setIsToggled(systemThemeString === "dark"); // Update isToggled state based on system theme
         }
         setIsLoading(false);
@@ -28,12 +27,12 @@ export default function SettingPage({ navigation }) {
   }, []); // Empty dependency array ensures this effect runs only once on mount
 
   const handleThemeToggle = () => {
-    const newTheme = isToggled ? 'light' : 'dark'; // Determine the new theme based on the toggle state
+    const newTheme = isToggled ? "light" : "dark"; // Determine the new theme based on the toggle state
     setSystemTheme(newTheme); // Update the system theme state
     setIsToggled(!isToggled); // Update the toggle state
     console.log(newTheme);
     // Save the selected theme to SecureStore
-    SecureStore.setItemAsync('systemTheme', newTheme);
+    SecureStore.setItemAsync("systemTheme", newTheme);
   };
   const handleNotificationsToggle = () => {
     setNotificationsEnabled(!notificationsEnabled);
@@ -55,14 +54,16 @@ export default function SettingPage({ navigation }) {
   const handleCheckUpdates = async () => {
     // Logic for checking updates
     try {
-      const supported = await Linking.canOpenURL('market://details?id=com.yourapp.package');
+      const supported = await Linking.canOpenURL(
+        "market://details?id=com.yourapp.package"
+      );
       if (supported) {
-        await Linking.openURL('market://details?id=com.yourapp.package');
+        await Linking.openURL("market://details?id=com.yourapp.package");
       } else {
         console.log("Can't handle url: App not installed");
       }
     } catch (error) {
-      console.error('An error occurred', error);
+      console.error("An error occurred", error);
     }
   };
 
@@ -74,63 +75,91 @@ export default function SettingPage({ navigation }) {
     // Navigate to feedback screen or open feedback form
   };
 
-
   return (
-    <View style={{ flex: 1 }}>
-      <Text style={{ fontSize: 20, marginBottom: 20, color: AppTheme.colors.listItemText }}>Settings</Text>
+    <View style={{ flex: 1 }} className="p-5">
+      <Text
+        style={{
+          fontSize: 20,
+          marginBottom: 20,
+          color: AppTheme.colors.listItemText,
+        }}
+      >
+        Settings
+      </Text>
 
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-        <Text style={{color: AppTheme.colors.listItemText }}>Dark Theme</Text>
-        <Switch
-          value={isToggled}
-          onValueChange={handleThemeToggle}
-        />
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: 20,
+        }}
+      >
+        <Text style={{ color: AppTheme.colors.listItemText }}>Dark Theme</Text>
+        <Switch value={isToggled} onValueChange={handleThemeToggle} />
       </View>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-        <Text>Notifications</Text>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: 20,
+        }}
+      >
+        {/* <Text style={{ color: AppTheme.colors.listItemText }}>
+          Notifications
+        </Text>
         <Switch
           value={notificationsEnabled}
           onValueChange={handleNotificationsToggle}
-        />
+        /> */}
       </View>
+      {/* <View className="flex flex-col gap-y-6 ">
+        <TouchableOpacity onPress={handleLanguageChange}>
+          <Text style={{ color: AppTheme.colors.listItemText }}>
+            Change Language
+          </Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity onPress={handleLanguageChange}>
-        <Text style={{ marginBottom: 10 }}>Change Language</Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={handleAccountSettings}>
+          <Text style={{ color: AppTheme.colors.listItemText }}>
+            Account Settings
+          </Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity onPress={handleAccountSettings}>
-        <Text style={{ marginBottom: 10 }}>Account Settings</Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={handlePrivacyAndSecurity}>
+          <Text style={{ color: AppTheme.colors.listItemText }}>
+            Privacy and Security
+          </Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity onPress={handlePrivacyAndSecurity}>
-        <Text style={{ marginBottom: 10 }}>Privacy and Security</Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={handleCheckUpdates}>
+          <Text style={{ color: AppTheme.colors.listItemText }}>
+            Check for Updates
+          </Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity onPress={handleCheckUpdates}>
-        <Text style={{ marginBottom: 10 }}>Check for Updates</Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={handleHelpAndSupport}>
+          <Text style={{ color: AppTheme.colors.listItemText }}>
+            Help and Support
+          </Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity onPress={handleHelpAndSupport}>
-        <Text style={{ marginBottom: 10 }}>Help and Support</Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={handleFeedback}>
+          <Text style={{ color: AppTheme.colors.listItemText }}>Feedback</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity onPress={handleFeedback}>
-        <Text style={{ marginBottom: 10 }}>Feedback</Text>
-      </TouchableOpacity>
+      </View> */}
 
-
-      <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to Notifications"
-      />
-
-
-    {/* </View> */}
+      {/* </View> */}
       <View className="absolute bottom-7 w-full">
-        <Text className="text-center" >App Version: 1.0.0</Text>
+        <Text
+          style={{ color: AppTheme.colors.listItemText }}
+          className="text-center"
+        >
+          App Version: 1.0.0
+        </Text>
       </View>
     </View>
-
-
   );
 }

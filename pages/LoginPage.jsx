@@ -1,23 +1,21 @@
 import { useEffect, useContext, useState } from "react";
 import {
-  Button,
   Image,
   Keyboard,
   KeyboardAvoidingView,
   Text,
   ScrollView,
-  View
+  View,
+  TouchableOpacity
 } from "react-native";
 import { FloatingLabelInput } from "react-native-floating-label-input";
 import { AuthContext } from "../context/AuthProvider";
 
-
 export default function LoginPage({ navigation }) {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [keyboardOffset, setKeyboardOffset] = useState(0);
-  const {login, error, isLoading} = useContext(AuthContext);
+  const { login, error, isLoading } = useContext(AuthContext);
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -54,17 +52,18 @@ export default function LoginPage({ navigation }) {
         </Text>
       </View>
       <Image
-        style={{ width: "100%", height: "40%", resizeMode: "cover" }}
+        style={{ width: "100%", height: "50%", resizeMode: "cover" }}
         source={require("../images/main-bg.png")}
       />
       <KeyboardAvoidingView style={{ flex: 1 }}>
-      <ScrollView
+        <ScrollView
           keyboardShouldPersistTaps="handled"
-          className=" absolute bottom-0 w-full" style={{ paddingHorizontal: 20, paddingBottom: keyboardOffset }}
+          className=" absolute bottom-0 w-full"
+          style={{ paddingHorizontal: 20, paddingBottom: keyboardOffset }}
           contentContainerStyle={{
             flex: 1,
-            justifyContent: 'center',
-            alignItems: 'stretch',
+            justifyContent: "center",
+            alignItems: "stretch",
             margin: 5,
           }}
         >
@@ -92,13 +91,11 @@ export default function LoginPage({ navigation }) {
                 </Text>
               </View>
             </View>
-            {error &&
+            {error && (
               <View className="w-fit  rounded-md flex flex-row ">
-                <Text className="my-auto text-red-600">
-                  {error}
-                </Text>
+                <Text className="my-auto text-red-600">{error}</Text>
               </View>
-              }
+            )}
             <View className="pb-2">
               <FloatingLabelInput
                 label="Email"
@@ -135,34 +132,42 @@ export default function LoginPage({ navigation }) {
 
             <View className="flex flex-col gap-2 justify-end">
               <View className="w-fit py-2 rounded-md bg-primary text-primary ">
-                <Button color="#ffff"
-                title={isLoading ? 'Logging in...' : 'Login'}
-                disabled={isLoading}
-                onPress={() => login(email, password)} />
+                <TouchableOpacity
+                  className=" w-fit rounded-md bg-primary  "
+                  disabled={isLoading}
+                  onPress={() => login(email, password)}
+                >
+                  <Text className="text-white text-center p-2">
+                    {isLoading ? "Logging in..." : "Login"}
+                  </Text>
+                </TouchableOpacity>
               </View>
               <View className="w-fit flex flex-row justify-end ">
-                <Button
-                  className="text-primary"
-                  title="Forget Password"
-                  color="#1E7B7B"
-                  onPress={() => navigation.navigate("ForgotPassword")}
-                />
+                    <TouchableOpacity
+                  className=" w-fit rounded-md  "
+                  onPress={() => navigation.navigate('ForgotPassword')}
+                >
+                  <Text className=" text-base font-bold text-primary text-center p-2">
+                  Forget Password
+                  </Text>
+                </TouchableOpacity>
               </View>
               <View className="w-fit  rounded-md flex flex-row ">
                 <Text className="my-auto text-gray-400">
                   Don't have an account yet?
                 </Text>
-                <Button
-                  className="text-primary"
-                  title="Register"
-                  color="#1E7B7B"
-                  onPress={() => navigation.navigate("Register")}
-                />
+                <TouchableOpacity
+                  className=" w-fit rounded-md  "
+                  onPress={() => navigation.navigate('Register')}
+                >
+                  <Text className=" text-base font-bold text-primary text-center p-2">
+                  Register
+                  </Text>
+                </TouchableOpacity>
               </View>
             </View>
           </View>
         </ScrollView>
-
       </KeyboardAvoidingView>
       <View className="m-2">
         <Text

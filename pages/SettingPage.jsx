@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { Switch, Text, View } from "react-native";
+import { ScrollView, Switch, Text, View } from "react-native";
 import * as SecureStore from "expo-secure-store";
 import { useTheme } from "../context/ThemeProvider";
+import ChangePassword from "../components/ChangePasswordCOmponent";
 
 export default function SettingPage({ navigation }) {
   const AppTheme = useTheme();
@@ -86,72 +87,47 @@ export default function SettingPage({ navigation }) {
       >
         Settings
       </Text>
-
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: 20,
-        }}
-      >
-        <Text style={{ color: AppTheme.colors.listItemText }}>Dark Theme</Text>
-        <Switch value={isToggled} onValueChange={handleThemeToggle} />
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: 20,
-        }}
-      >
-        {/* <Text style={{ color: AppTheme.colors.listItemText }}>
-          Notifications
-        </Text>
-        <Switch
-          value={notificationsEnabled}
-          onValueChange={handleNotificationsToggle}
-        /> */}
-      </View>
-      {/* <View className="flex flex-col gap-y-6 ">
-        <TouchableOpacity onPress={handleLanguageChange}>
+      <ScrollView>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: 20,
+          }}
+        >
           <Text style={{ color: AppTheme.colors.listItemText }}>
-            Change Language
+            Dark Theme
           </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={handleAccountSettings}>
+          <Switch value={isToggled} onValueChange={handleThemeToggle} />
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: 20,
+          }}
+        >
           <Text style={{ color: AppTheme.colors.listItemText }}>
-            Account Settings
+            Notifications
           </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={handlePrivacyAndSecurity}>
-          <Text style={{ color: AppTheme.colors.listItemText }}>
-            Privacy and Security
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={handleCheckUpdates}>
-          <Text style={{ color: AppTheme.colors.listItemText }}>
-            Check for Updates
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={handleHelpAndSupport}>
-          <Text style={{ color: AppTheme.colors.listItemText }}>
-            Help and Support
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={handleFeedback}>
-          <Text style={{ color: AppTheme.colors.listItemText }}>Feedback</Text>
-        </TouchableOpacity>
-
-      </View> */}
-
-      {/* </View> */}
+          <Switch
+            value={notificationsEnabled}
+            onValueChange={handleNotificationsToggle}
+          />
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: 20,
+          }}
+        >
+          <ChangePassword />
+        </View>
+      </ScrollView>
       <View className="absolute bottom-7 w-full">
         <Text
           style={{ color: AppTheme.colors.listItemText }}
